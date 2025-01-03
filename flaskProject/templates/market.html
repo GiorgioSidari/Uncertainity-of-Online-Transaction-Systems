@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Market Page
+{% endblock %}
+
+{% block content %}
+    <h2>Available Items</h2>
+    <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Barcode</th>
+                <th scope="col">Price</th>
+                <th scope="col">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.barcode }}</td>
+                    <td>{{ item.price }}$</td>
+                    <td>
+                        <form action="/create-checkout-session/{{ item.id }}" method="POST" style="display:inline;">
+                            <button class="btn btn-success">Buy Item</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
